@@ -11,20 +11,14 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:myapp/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+  testWidgets('EcoLog widget builds', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+    // The original test failed because it was looking for a `MyApp` widget
+    // and counter logic that no longer exist.
+    // This test simply verifies that the main widget `EcoLog` can be built without crashing.
+    await tester.pumpWidget(MaterialApp(home: EcoLog()));
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
-
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    // Verify that the EcoLog widget is present.
+    expect(find.byType(EcoLog), findsOneWidget);
   });
 }
